@@ -1,0 +1,24 @@
+import express from 'express';
+import { graphqlHTTP } from 'express-graphql';
+import schema from './schema';
+
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Root app page requested ... res = text');
+});
+
+const root = { hello: () => "HI, I'm ahmed" };
+
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    rootValue: root,
+    graphiql: true,
+  }),
+);
+
+app.listen(8080, () =>
+  console.log('http://localhost:8080/graphql\nhttp://localhost:8080/graphql'),
+);
