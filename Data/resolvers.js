@@ -68,6 +68,11 @@ const resolvers = {
       return newProduct;
     }
   },
+
+  deleteProduct: async ({ id }) => {
+    await ProductsModel.findOneAndRemove({ _id: id });
+    return `Sucessfull deleting product id=${id}`;
+  },
 };
 
 export default resolvers;
