@@ -9,10 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "casual": "^1.6.2",
     "crypto": "^1.0.1",
     "express": "^4.18.2",
     "express-graphql": "^0.12.0",
-    "graphql": "^16.6.0"
+    "graphql": "^16.6.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^7.0.1",
+    "sequelize": "^6.29.3",
+    "sqlite3": "^5.1.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.20.7",
