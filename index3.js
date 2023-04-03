@@ -7,15 +7,26 @@
 const { ApolloServer, gql } = require('apollo-server');
 
 const typeDefs = gql`
-  type RunningDay {
+  # object type
+  type SkiDays {
     id: ID!
     date: String!
     road: String!
+    conditions: Conditions
   }
 
+  # enum type
+  enum Conditions {
+    POWDER
+    HEAVY
+    ICE
+    THIN
+  }
+
+  # wrapper for all queries types
   type Query {
     totalDays: Int!
-    allDays: [RunningDay!]! # can accept empty array, but can't be null
+    allDays: [SkiDays!]! # can accept empty array, but can't be null
   }
 `;
 
