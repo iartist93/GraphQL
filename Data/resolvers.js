@@ -16,13 +16,8 @@ import { ProductsModel } from './dbconnector';
 // }
 
 const resolvers = {
-  getProducts: () => {
-    return new Promise((resolve, reject) => {
-      ProductsModel.find({}, (err, products) => {
-        if (err) reject(err);
-        else resolve(products);
-      });
-    });
+  getProducts: async () => {
+    return await ProductsModel.find({});
   },
 
   getProduct: ({ id }) => {

@@ -22,6 +22,7 @@ const schema = buildSchema(`
 
     type Query {
         getProduct(id: ID): Product
+        getProducts: [Product]
     }
     
     type Mutation {
