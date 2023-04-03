@@ -1,8 +1,21 @@
+/**
+ *
+ * Testing Apollo-Server application
+ *
+ */
+
 const { ApolloServer, gql } = require('apollo-server');
 
 const typeDefs = gql`
+  type RunningDay {
+    id: ID!
+    date: String!
+    road: String!
+  }
+
   type Query {
     totalDays: Int!
+    allDays: [RunningDay!]! # can accept empty array, but can't be null
   }
 `;
 
