@@ -11,10 +11,15 @@ const typeDefs = gql`
   scalar Date
 
   # object type
+  """
+  Documentations for the SkiDay should be here ...
+  """
   type SkiDay {
+    "ID of of the ski day"
     id: ID!
     date: Date!
     road: String!
+    "Condition of the skiday"
     conditions: Conditions
   }
 
@@ -53,6 +58,10 @@ const typeDefs = gql`
   type Mutation {
     removeDay(id: ID!): SkiDay!
     addDay(input: AddDayInput!): RemoveDayPayload
+  }
+
+  type Subscription {
+    newDay: SkiDay!
   }
 `;
 
