@@ -7,10 +7,13 @@
 const { ApolloServer, gql } = require('apollo-server');
 
 const typeDefs = gql`
+  # scaler type
+  scalar Date
+
   # object type
-  type SkiDays {
+  type SkiDay {
     id: ID!
-    date: String!
+    date: Date!
     road: String!
     conditions: Conditions
   }
@@ -26,7 +29,30 @@ const typeDefs = gql`
   # wrapper for all queries types
   type Query {
     totalDays: Int!
-    allDays: [SkiDays!]! # can accept empty array, but can't be null
+    allDays: [SkiDay!]! # can accept empty array, but can't be null
+  }
+
+  # input type
+  input AddDayInput {
+    date: Date!
+    road: String!
+    conditions: Conditions
+  }
+
+  # return object - add/delete fields from SkiDay
+  type RemoveDayPayload {
+    id: ID!
+    date: Date!
+    road: String!
+    conditions: Conditions
+    removed: Boolean
+    totalBefore: Int
+    totalAfter: Int
+  }
+
+  type Mutation {
+    removeDay(id: ID!): SkiDay!
+    addDay(input: AddDayInput!): RemoveDayPayload
   }
 `;
 
@@ -39,9 +65,18 @@ const typeDefs = gql`
  */
 const resolvers = {};
 
+const mocks = {
+  Date: () => '11/11/2011',
+  Email: () => 'test@gmail.com',
+  Query: () => ({
+    allDays: () => [...new Array(8)],
+  }),
+};
+
 const server = new ApolloServer({
   typeDefs,
-  mocks: true, // mock data from the schema
+  //   mocks: true, // mock data from the schema
+  mocks,
 });
 
 server.listen().then(({ url }) => console.log(`Server running at ${url}`));
